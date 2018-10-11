@@ -50,6 +50,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         final String desc = news.getNewsDescription();
         final String name = news.getNewsName();
         final String author = news.getNewsAuthor();
+        final String url = news.getNewsURL();
+        final String imageUrl = news.getNewsImageUrl();
         if (newsDate.contains(DATE_SEPARATOR)) {
             String[] parts = newsDate.split(DATE_SEPARATOR);
             newsDate = parts[0];
@@ -65,13 +67,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(context, DetailsActivity.class);
                 intent.putExtra("description", desc);
                 intent.putExtra("title", title);
                 intent.putExtra("date", finalNewsDate);
                 intent.putExtra("name", name);
                 intent.putExtra("author", author);
+                intent.putExtra("url",url);
+                intent.putExtra("imageUrl",imageUrl);
                 context.startActivity(intent);
             }
         });

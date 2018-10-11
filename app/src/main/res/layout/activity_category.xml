@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".CategoryActivity">
+
+    <TextView
+        android:id="@+id/textViewHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/select_category"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/imageViewTechnology"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textViewHeading"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:background="@android:color/black"
+        android:padding="10dp"
+        android:src="@drawable/technology" />
+
+    <Button
+        android:id="@+id/buttonTechnology"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textViewHeading"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/imageViewTechnology"
+        android:background="@android:color/black"
+        android:gravity="center"
+        android:text="@string/technology"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+
+    <ImageView
+        android:id="@+id/imageViewSports"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/buttonTechnology"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:background="@android:color/black"
+        android:padding="10dp"
+        android:src="@drawable/sports" />
+
+    <Button
+        android:id="@+id/buttonSports"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/buttonTechnology"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/imageViewSports"
+        android:background="@android:color/black"
+        android:gravity="center"
+        android:text="@string/sports"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+
+    <ImageView
+        android:id="@+id/imageViewEntertainment"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/buttonSports"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:background="@android:color/black"
+        android:padding="10dp"
+        android:src="@drawable/entertainment" />
+
+    <Button
+        android:id="@+id/buttonEntertainment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/buttonSports"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/imageViewSports"
+        android:background="@android:color/black"
+        android:gravity="center"
+        android:text="@string/entertainment"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+
+    <ImageView
+        android:id="@+id/imageViewBusiness"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/buttonEntertainment"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:background="@android:color/black"
+        android:padding="10dp"
+        android:src="@drawable/business" />
+
+    <Button
+        android:id="@+id/buttonBusiness"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/buttonEntertainment"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/imageViewSports"
+        android:background="@android:color/black"
+        android:gravity="center"
+        android:text="@string/business"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+</RelativeLayout>

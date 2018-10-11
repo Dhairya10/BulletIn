@@ -23,9 +23,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +37,12 @@ public class HomeActivity extends AppCompatActivity implements LoaderManager.Loa
     private RecyclerView recyclerView;
     private TextView textViewEmpty;
     private ProgressBar progressBar;
-    NewsAdapter newsAdapter;
-    private static final String NEWS_URL = "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=2856b411a447490680d4b56bba405a28";
+    private NewsAdapter newsAdapter;
+    private static String NEWS_URL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=2856b411a447490680d4b56bba405a28&category=";
     private static final String LOG_TAG = HomeActivity.class.getSimpleName();
-    static String newsName;
+    private static String newsName;
+    private String newsCategory;
+    private String newUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,20 @@ public class HomeActivity extends AppCompatActivity implements LoaderManager.Loa
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         newsAdapter = new NewsAdapter(this, new ArrayList<News>());
         recyclerView.setAdapter(newsAdapter);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            newsCategory = extras.getString("Category");
+            if (newsCategory != null) {
+                try {
+                    String encodedString = URLEncoder.encode(newsCategory, "UTF-8");
+                    newUrl = NEWS_URL + encodedString;
+                } catch (UnsupportedEncodingException e) {
+                    Log.e(LOG_TAG, "Problem in Encoding : " + e);
+                }
+            }
+        }
+
 
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
@@ -102,8 +120,8 @@ public class HomeActivity extends AppCompatActivity implements LoaderManager.Loa
             urlConnection.setConnectTimeout(15000);
             urlConnection.connect();
             if (urlConnection.getResponseCode() == 200) {
-                inputStream = urlConnection.getInputStream();
-                jsonResponse = readFromStream(inputStream);
+                inputStream = urlConnection.getInputStream();  // HttpURLConnection class is used for obtaining JSON data from the server
+                jsonResponse = readFromStream(inputStream);    // InputStream returns raw binary data. So in order to convert raw binary data in human readable format we use InputStreamReader
             } else {
                 Log.e(LOG_TAG, "HTTP RESPONSE =" + urlConnection.getResponseCode());
             }
@@ -160,9 +178,11 @@ public class HomeActivity extends AppCompatActivity implements LoaderManager.Loa
                         String date = jsonObject.getString("publishedAt");
                         String url = jsonObject.getString("url");
                         String description = jsonObject.getString("description");
+                        String urlToImage = jsonObject.getString("urlToImage");
+
                         if (author.equals("null"))
                             author = "Unknown";
-                        News news = new News(title, date, newsName, url, author, description);
+                        News news = new News(title, date, newsName, url, author, description,urlToImage);
                         newsList.add(news);
                     }
 
@@ -176,7 +196,7 @@ public class HomeActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
-        return new NewsLoader(this, NEWS_URL);
+        return new NewsLoader(this, newUrl);
     }
 
     @Override
